@@ -1,24 +1,47 @@
-# Python cache
-__pycache__/
-*.pyc
-
+# Byte-compiled / cached Python files
+__pycache
+/
+__
+*
+.py[cod]
+*
+.class
+# Distribution / packaging
+build/
+dist/
+*
+.egg-info/
+*
+.egg
 # Virtual environments
 .venv/
 venv/
 env/
-
 # Jupyter
-.ipynb_checkpoints/
-
-# IDE
+.ipynb
+checkpoints/
+_
+# Pickled results (regenerable)
+*
+.pkl
+# IDE settings
 .vscode/
 .idea/
-
+*
+.swp
 # OS
-.DS_Store
+.DS
+Store
+_
 Thumbs.db
-
-# Build files
-build/
-dist/
-*.egg-info/
+# Testing
+.pytest
+_
+.coverage
+htmlcov/
+cache/
+# Data — keep CSVs, ignore archives
+data/*
+data/*
+.zip
+.tar.gz
