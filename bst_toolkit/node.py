@@ -1,22 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, Dict, Any
 
 
 @dataclass
 class TrialNode:
-    """
-    A single node in the hyperparameter BST.
-    The BST is keyed by `score`.
-
-    Attributes
-    ----------
-    score  : the evaluation metric for this trial (e.g. accuracy)
-    params : the hyperparameter dictionary used in this trial
-    left   : left child node (score strictly less than this node)
-    right  : right child node (score strictly greater than this node)
-    """
     score: float
-    params: dict
+    params: Dict[str, Any]
     left: Optional["TrialNode"] = field(default=None, repr=False)
     right: Optional["TrialNode"] = field(default=None, repr=False)
 

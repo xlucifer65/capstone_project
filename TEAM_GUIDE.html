@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Capstone Team Guide</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      padding: 40px 20px;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      padding: 50px 30px 40px;
+      background: linear-gradient(135deg, #1a1f2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 20px;
+      margin-bottom: 50px;
+      border: 1px solid #2d3748;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(99,179,237,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #63b3ed, #9f7aea, #f687b3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .header p { color: #a0aec0; font-size: 1rem; }
+    .header .badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .badge-blue  { background: rgba(99,179,237,0.15);  color: #63b3ed;  border: 1px solid rgba(99,179,237,0.3); }
+    .badge-purple{ background: rgba(159,122,234,0.15); color: #9f7aea;  border: 1px solid rgba(159,122,234,0.3);}
+    .badge-pink  { background: rgba(246,135,179,0.15); color: #f687b3;  border: 1px solid rgba(246,135,179,0.3);}
+
+    /* ── Section titles ── */
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin: 50px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2d3748;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon { font-size: 1.4rem; }
+
+    /* ── Person cards ── */
+    .person-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .person-card {
+      background: #1a1f2e;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid #2d3748;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .person-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .person-card.person-a { border-top: 4px solid #63b3ed; }
+    .person-card.person-b { border-top: 4px solid #68d391; }
+    .person-card.person-c { border-top: 4px solid #f6ad55; }
+
+    .person-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .person-a .person-label { color: #63b3ed; }
+    .person-b .person-label { color: #68d391; }
+    .person-c .person-label { color: #f6ad55; }
+
+    .person-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 14px;
+    }
+    .file-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: 'Courier New', monospace;
+      margin: 3px 3px 3px 0;
+    }
+    .person-a .file-tag { background: rgba(99,179,237,0.12); color: #90cdf4; border: 1px solid rgba(99,179,237,0.25); }
+    .person-b .file-tag { background: rgba(104,211,145,0.12); color: #9ae6b4; border: 1px solid rgba(104,211,145,0.25); }
+    .person-c .file-tag { background: rgba(246,173,85,0.12); color: #fbd38d; border: 1px solid rgba(246,173,85,0.25); }
+
+    /* ── Flowchart ── */
+    .flowchart {
+      background: #1a1f2e;
+      border-radius: 16px;
+      padding: 40px 30px;
+      border: 1px solid #2d3748;
+      overflow-x: auto;
+    }
+
+    .flow-start, .flow-end {
+      background: linear-gradient(135deg, #2d3748, #1a202c);
+      border: 2px solid #4a5568;
+      border-radius: 12px;
+      padding: 16px 30px;
+      text-align: center;
+      font-weight: 700;
+      color: #e2e8f0;
+      max-width: 500px;
+      margin: 0 auto 10px;
+    }
+    .flow-end {
+      background: linear-gradient(135deg, #1a365d, #2a4365);
+      border-color: #2b6cb0;
+      color: #bee3f8;
+    }
+
+    .flow-arrow {
+      text-align: center;
+      color: #4a5568;
+      font-size: 1.4rem;
+      margin: 4px 0;
+      line-height: 1;
+    }
+
+    .flow-parallel {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 10px 0;
+    }
+    .flow-box {
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.88rem;
+      border: 1px solid;
+    }
+    .flow-box.a { background: rgba(99,179,237,0.1); border-color: rgba(99,179,237,0.4); color: #90cdf4; }
+    .flow-box.b { background: rgba(104,211,145,0.1); border-color: rgba(104,211,145,0.4); color: #9ae6b4; }
+    .flow-box.c { background: rgba(246,173,85,0.1);  border-color: rgba(246,173,85,0.4);  color: #fbd38d; }
+
+    .flow-box .box-label {
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+    .flow-box .box-file {
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      margin-top: 6px;
+      opacity: 0.85;
+    }
+
+    .flow-merge {
+      background: rgba(159,122,234,0.1);
+      border: 2px solid rgba(159,122,234,0.4);
+      border-radius: 12px;
+      padding: 16px 30px;
+      text-align: center;
+      font-weight: 700;
+      color: #d6bcfa;
+      max-width: 500px;
+      margin: 10px auto;
+    }
+
+    .handoff-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 16px;
+      font-size: 0.78rem;
+      color: #a0aec0;
+    }
+    .handoff-line .hl-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Steps ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .steps-card {
+      background: #1a1f2e;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid #2d3748;
+    }
+    .steps-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .steps-card.a h3 { color: #63b3ed; }
+    .steps-card.b h3 { color: #68d391; }
+    .steps-card.c h3 { color: #f6ad55; }
+
+    .step-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .a .step-num { background: rgba(99,179,237,0.2); color: #63b3ed; border: 1px solid rgba(99,179,237,0.4); }
+    .b .step-num { background: rgba(104,211,145,0.2); color: #68d391; border: 1px solid rgba(104,211,145,0.4); }
+    .c .step-num { background: rgba(246,173,85,0.2); color: #f6ad55; border: 1px solid rgba(246,173,85,0.4); }
+
+    .step-content { flex: 1; }
+    .step-content .step-title {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: #e2e8f0;
+      margin-bottom: 4px;
+      font-family: 'Courier New', monospace;
+    }
+    .step-content .step-desc {
+      font-size: 0.78rem;
+      color: #718096;
+      line-height: 1.5;
+    }
+    .step-commit {
+      font-size: 0.72rem;
+      font-family: 'Courier New', monospace;
+      color: #553c9a;
+      background: rgba(159,122,234,0.08);
+      border: 1px solid rgba(159,122,234,0.2);
+      border-radius: 5px;
+      padding: 4px 8px;
+      margin-top: 6px;
+      display: inline-block;
+    }
+    .step-wait {
+      font-size: 0.72rem;
+      color: #e53e3e;
+      background: rgba(229,62,62,0.08);
+      border: 1px solid rgba(229,62,62,0.2);
+      border-radius: 5px;
+      padding: 4px 8px;
+      margin-top: 6px;
+      display: inline-block;
+    }
+
+    /* ── Dependency table ── */
+    .dep-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .dep-table th {
+      background: #2d3748;
+      color: #a0aec0;
+      font-weight: 600;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.78rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .dep-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #2d3748;
+      color: #cbd5e0;
+      vertical-align: top;
+    }
+    .dep-table tr:hover td { background: rgba(255,255,255,0.03); }
+    .dep-table .mono {
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+    }
+    .status-now   { color: #68d391; font-weight: 600; }
+    .status-wait  { color: #f6ad55; font-weight: 600; }
+    .status-block { color: #fc8181; font-weight: 600; }
+
+    /* ── Handoff cards ── */
+    .handoff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .handoff-card {
+      background: #1a1f2e;
+      border-radius: 14px;
+      padding: 24px;
+      border: 1px solid #2d3748;
+    }
+    .handoff-card h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .handoff-card .arrow-badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .handoff-card pre {
+      background: #0f1117;
+      border: 1px solid #2d3748;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.75rem;
+      font-family: 'Courier New', monospace;
+      color: #a0aec0;
+      overflow-x: auto;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    .handoff-card pre .kw  { color: #9f7aea; }
+    .handoff-card pre .fn  { color: #63b3ed; }
+    .handoff-card pre .str { color: #68d391; }
+    .handoff-card pre .cm  { color: #4a5568; }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #63b3ed, #9f7aea, #f6ad55);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 28px;
+      padding-left: 24px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid;
+    }
+    .timeline-item:nth-child(1)::before { border-color: #63b3ed; background: #1a1f2e; }
+    .timeline-item:nth-child(2)::before { border-color: #9f7aea; background: #1a1f2e; }
+    .timeline-item:nth-child(3)::before { border-color: #68d391; background: #1a1f2e; }
+    .timeline-item:nth-child(4)::before { border-color: #f6ad55; background: #1a1f2e; }
+    .timeline-item:nth-child(5)::before { border-color: #f687b3; background: #1a1f2e; }
+
+    .timeline-day {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #4a5568;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .timeline-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+    }
+    .timeline-tasks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .timeline-task {
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 0.75rem;
+      font-family: 'Courier New', monospace;
+    }
+    .tl-a { background: rgba(99,179,237,0.1); color: #90cdf4; border: 1px solid rgba(99,179,237,0.2); }
+    .tl-b { background: rgba(104,211,145,0.1); color: #9ae6b4; border: 1px solid rgba(104,211,145,0.2); }
+    .tl-c { background: rgba(246,173,85,0.1); color: #fbd38d; border: 1px solid rgba(246,173,85,0.2); }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: #0f1117;
+      border: 1px solid #2d3748;
+      border-left: 3px solid #9f7aea;
+      border-radius: 8px;
+      padding: 16px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: #a0aec0;
+      overflow-x: auto;
+      line-height: 1.7;
+      margin: 12px 0;
+      white-space: pre;
+    }
+    .code-block .kw  { color: #9f7aea; }
+    .code-block .fn  { color: #63b3ed; }
+    .code-block .str { color: #68d391; }
+    .code-block .cm  { color: #4a5568; }
+    .code-block .num { color: #f6ad55; }
+
+    /* ── Checklist ── */
+    .checklist { list-style: none; }
+    .checklist li {
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      background: #1a1f2e;
+      border: 1px solid #2d3748;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: #cbd5e0;
+    }
+    .checklist .check-box {
+      width: 20px; height: 20px;
+      border-radius: 4px;
+      border: 2px solid #4a5568;
+      flex-shrink: 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .flow-parallel { grid-template-columns: 1fr; }
+      .header h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <div class="header">
+    <h1>BST-Backed Hyperparameter Optimiser</h1>
+    <p>Capstone Project Team Guide &nbsp;|&nbsp; Algorithmic Workshop (AIS / EPITA)</p>
+    <p style="margin-top:6px; color:#718096; font-size:0.85rem;">Instructor: Adrian ROSARI</p>
+    <div class="badges">
+      <span class="badge badge-blue">Person A — bst_toolkit</span>
+      <span class="badge badge-pink">Person B — data + ml_toolkit</span>
+      <span class="badge" style="background:rgba(246,173,85,0.15);color:#f6ad55;border:1px solid rgba(246,173,85,0.3);">Person C — benchmarks + notebook</span>
+    </div>
+  </div>
+
+  <!-- ── WHO DOES WHAT ── -->
+  <div class="section-title"><span class="icon">👥</span> Who Does What</div>
+  <div class="person-grid">
+    <div class="person-card person-a">
+      <div class="person-label">Person A</div>
+      <div class="person-name">BST Toolkit (Algorithmic Core)</div>
+      <div>
+        <span class="file-tag">node.py</span>
+        <span class="file-tag">bst.py</span>
+        <span class="file-tag">registry.py</span>
+        <span class="file-tag">rebuild.py</span>
+      </div>
+      <p style="margin-top:14px; font-size:0.8rem; color:#718096; line-height:1.6;">
+        Builds the entire BST engine. Every other module depends on this.
+        Requires understanding of recursion, BST insert/delete/search,
+        and divide &amp; conquer (balanced rebuild).
+      </p>
+    </div>
+    <div class="person-card person-b">
+      <div class="person-label">Person B</div>
+      <div class="person-name">Data + ML Toolkit</div>
+      <div>
+        <span class="file-tag">data/download.py</span>
+        <span class="file-tag">grid_search.py</span>
+        <span class="file-tag">transfer.py</span>
+      </div>
+      <p style="margin-top:14px; font-size:0.8rem; color:#718096; line-height:1.6;">
+        Downloads both datasets, runs the hyperparameter grid search using
+        itertools.product, and performs the transfer analysis comparing
+        rankings between Dataset A and B.
+      </p>
+    </div>
+    <div class="person-card person-c">
+      <div class="person-label">Person C</div>
+      <div class="person-name">Benchmarks + Notebook</div>
+      <div>
+        <span class="file-tag">timer.py</span>
+        <span class="file-tag">capstone.ipynb</span>
+      </div>
+      <p style="margin-top:14px; font-size:0.8rem; color:#718096; line-height:1.6;">
+        Builds the timing utilities, handles integration testing, and writes
+        all 8 sections of the final Jupyter notebook deliverable. Also runs
+        the benchmark comparison of 3 rebuild strategies.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── FLOWCHART ── -->
+  <div class="section-title"><span class="icon">🔀</span> Full Workflow Flowchart</div>
+  <div class="flowchart">
+
+    <div class="flow-start">
+      🚀 &nbsp; PROJECT START &nbsp; — &nbsp; All 3 people: <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.85em;">git clone</code> + <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.85em;">pip install -e .</code>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <!-- Parallel start -->
+    <div class="flow-parallel">
+      <div class="flow-box a">
+        <div class="box-label">Person A</div>
+        <strong>STEP A-1</strong>
+        <div class="box-file">node.py</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">TrialNode dataclass<br>__lt__ &amp; __repr__</div>
+      </div>
+      <div class="flow-box b">
+        <div class="box-label">Person B</div>
+        <strong>STEP B-1</strong>
+        <div class="box-file">download.py</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">Download both ZIPs<br>Save wdbc.csv + banknote.csv</div>
+      </div>
+      <div class="flow-box c">
+        <div class="box-label">Person C</div>
+        <strong>STEP C-1 ✅</strong>
+        <div class="box-file">timer.py</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">@timed decorator<br>benchmark() function<br><em>No dependencies — start now!</em></div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-parallel">
+      <div class="flow-box a">
+        <div class="box-label">Person A</div>
+        <strong>STEP A-2</strong>
+        <div class="box-file">bst.py</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">insert / search / delete<br>4 traversals<br>height / is_balanced</div>
+      </div>
+      <div class="flow-box b">
+        <div class="box-label">Person B</div>
+        <strong>Waiting...</strong>
+        <div class="box-file" style="opacity:0.5;">grid_search.py</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">Waiting for A's registry.py<br>Can read specs in the meantime</div>
+      </div>
+      <div class="flow-box c">
+        <div class="box-label">Person C</div>
+        <strong>STEP C-2</strong>
+        <div class="box-file">Notebook Section 1–2</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">Write intro text<br>Plan notebook structure</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div class="flow-parallel">
+      <div class="flow-box a">
+        <div class="box-label">Person A</div>
+        <strong>STEP A-3</strong>
+        <div class="box-file">registry.py</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">HyperparamRegistry<br>add_trial / top_k / range_query</div>
+      </div>
+      <div class="flow-box b" style="opacity:0.35;">
+        <div class="box-label">Still waiting...</div>
+        <div style="font-size:0.72rem;margin-top:6px;">Until A-3 is pushed</div>
+      </div>
+      <div class="flow-box c" style="opacity:0.35;">
+        <div class="box-label">Person C</div>
+        <div style="font-size:0.72rem;margin-top:6px;">Review team code,<br>write integration test stubs</div>
+      </div>
+    </div>
+
+    <!-- Handoff A→B -->
+    <div style="margin:12px 0; text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(99,179,237,0.08);border:1px solid rgba(99,179,237,0.25);border-radius:10px;padding:10px 20px;">
+        <span style="font-size:1.1rem;">📢</span>
+        <span style="font-size:0.82rem;color:#90cdf4;">
+          <strong>HANDOFF A → B:</strong> &nbsp;Person A pushes registry.py → tells B "pull and start grid_search"
+        </span>
+      </div>
+    </div>
+
+    <div class="flow-parallel">
+      <div class="flow-box a">
+        <div class="box-label">Person A</div>
+        <strong>STEP A-4</strong>
+        <div class="box-file">rebuild.py</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">rebuild_naive<br>rebuild_shuffled<br>rebuild_balanced</div>
+      </div>
+      <div class="flow-box b">
+        <div class="box-label">Person B</div>
+        <strong>STEP B-2</strong>
+        <div class="box-file">grid_search.py</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">itertools.product<br>HyperparamRegistry.add_trial()<br>tqdm progress bar</div>
+      </div>
+      <div class="flow-box c" style="opacity:0.35;">
+        <div class="box-label">Person C</div>
+        <div style="font-size:0.72rem;margin-top:6px;">Integration testing prep</div>
+      </div>
+    </div>
+
+    <!-- Handoff A→B (rebuild) -->
+    <div style="margin:12px 0; text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(104,211,145,0.08);border:1px solid rgba(104,211,145,0.25);border-radius:10px;padding:10px 20px;">
+        <span style="font-size:1.1rem;">📢</span>
+        <span style="font-size:0.82rem;color:#9ae6b4;">
+          <strong>HANDOFF A → B:</strong> &nbsp;Person A pushes rebuild.py → tells B "pull and start transfer.py"
+        </span>
+      </div>
+    </div>
+
+    <div class="flow-parallel">
+      <div class="flow-box a" style="opacity:0.4;">
+        <div class="box-label">Person A</div>
+        <strong>Done ✅</strong>
+        <div style="font-size:0.72rem;margin-top:6px;">Help review / test<br>Answer questions from B and C</div>
+      </div>
+      <div class="flow-box b">
+        <div class="box-label">Person B</div>
+        <strong>STEP B-3</strong>
+        <div class="box-file">transfer.py</div>
+        <div style="font-size:0.72rem;margin-top:6px;opacity:0.65;">In-order both registries<br>Rank lookup dicts<br>Drift analysis</div>
+      </div>
+      <div class="flow-box c" style="opacity:0.4;">
+        <div class="box-label">Person C</div>
+        <div style="font-size:0.72rem;margin-top:6px;">Integration testing<br>Notebook sections 2–5</div>
+      </div>
+    </div>
+
+    <!-- Final merge -->
+    <div style="margin:12px 0; text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(246,173,85,0.08);border:1px solid rgba(246,173,85,0.25);border-radius:10px;padding:10px 20px;">
+        <span style="font-size:1.1rem;">📢</span>
+        <span style="font-size:0.82rem;color:#fbd38d;">
+          <strong>HANDOFF A + B → C:</strong> &nbsp;All packages done → Person C writes notebook sections 3–8
+        </span>
+      </div>
+    </div>
+
+    <div class="flow-arrow">↓</div>
+    <div class="flow-merge">
+      🔗 &nbsp; INTEGRATION POINT &nbsp; — &nbsp; All packages done, Person C owns the notebook
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <div style="background:#1a1f2e;border:1px solid #2d3748;border-radius:12px;padding:20px;max-width:600px;margin:0 auto;">
+      <div style="font-size:0.8rem;color:#a0aec0;line-height:2;">
+        📓 &nbsp;<strong style="color:#e2e8f0;">Person C writes all 8 notebook sections:</strong><br>
+        &nbsp;&nbsp;&nbsp;1. Introduction &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Dataset A Exploration<br>
+        &nbsp;&nbsp;&nbsp;3. Phase 1 Grid Search &nbsp; 4. BST Introspection<br>
+        &nbsp;&nbsp;&nbsp;5. Dataset B Exploration &nbsp; 6. Phase 2 Rebuild + Benchmarks<br>
+        &nbsp;&nbsp;&nbsp;7. Transfer Analysis &nbsp;&nbsp; 8. Conclusion
+      </div>
+    </div>
+
+    <div class="flow-arrow">↓</div>
+    <div class="flow-end">
+      🏁 &nbsp; ALL: Final review → <code>git commit</code> → <code>git tag v1.0</code> → Submit
+    </div>
+
+  </div>
+
+  <!-- ── DEPENDENCY MAP ── -->
+  <div class="section-title"><span class="icon">🔗</span> Dependency Map — What Blocks What</div>
+  <div style="background:#1a1f2e;border-radius:16px;padding:28px;border:1px solid #2d3748;overflow-x:auto;">
+    <table class="dep-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Depends On</th>
+          <th>Who Writes It</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">node.py</td>
+          <td style="color:#4a5568;">Nothing — start immediately</td>
+          <td><span style="color:#63b3ed;font-weight:600;">Person A</span></td>
+          <td class="status-now">START NOW</td>
+        </tr>
+        <tr>
+          <td class="mono">bst.py</td>
+          <td class="mono" style="color:#90cdf4;">node.py</td>
+          <td><span style="color:#63b3ed;font-weight:600;">Person A</span></td>
+          <td class="status-wait">After node.py</td>
+        </tr>
+        <tr>
+          <td class="mono">registry.py</td>
+          <td class="mono" style="color:#90cdf4;">bst.py</td>
+          <td><span style="color:#63b3ed;font-weight:600;">Person A</span></td>
+          <td class="status-wait">After bst.py</td>
+        </tr>
+        <tr>
+          <td class="mono">rebuild.py</td>
+          <td class="mono" style="color:#90cdf4;">registry.py</td>
+          <td><span style="color:#63b3ed;font-weight:600;">Person A</span></td>
+          <td class="status-wait">After registry.py</td>
+        </tr>
+        <tr>
+          <td class="mono">download.py</td>
+          <td style="color:#4a5568;">Nothing — start immediately</td>
+          <td><span style="color:#68d391;font-weight:600;">Person B</span></td>
+          <td class="status-now">START NOW</td>
+        </tr>
+        <tr>
+          <td class="mono">timer.py</td>
+          <td style="color:#4a5568;">Nothing — start immediately</td>
+          <td><span style="color:#f6ad55;font-weight:600;">Person C</span></td>
+          <td class="status-now">START NOW</td>
+        </tr>
+        <tr>
+          <td class="mono">grid_search.py</td>
+          <td class="mono" style="color:#9ae6b4;">registry.py + download.py</td>
+          <td><span style="color:#68d391;font-weight:600;">Person B</span></td>
+          <td class="status-block">BLOCKED until A-3 done</td>
+        </tr>
+        <tr>
+          <td class="mono">transfer.py</td>
+          <td class="mono" style="color:#9ae6b4;">registry.py + rebuild.py + grid_search.py</td>
+          <td><span style="color:#68d391;font-weight:600;">Person B</span></td>
+          <td class="status-block">BLOCKED until A-4 done</td>
+        </tr>
+        <tr>
+          <td class="mono">capstone.ipynb</td>
+          <td style="color:#4a5568;">ALL packages complete</td>
+          <td><span style="color:#f6ad55;font-weight:600;">Person C</span></td>
+          <td class="status-block">BLOCKED until everything done</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── STEP BY STEP ── -->
+  <div class="section-title"><span class="icon">📋</span> Step-by-Step Per Person</div>
+  <div class="steps-grid">
+
+    <!-- Person A -->
+    <div class="steps-card a">
+      <h3>🔵 Person A — bst_toolkit</h3>
+      <div class="step-item">
+        <div class="step-num a">A1</div>
+        <div class="step-content">
+          <div class="step-title">node.py</div>
+          <div class="step-desc">TrialNode dataclass with score, params, left, right. Implement __lt__ and __repr__.</div>
+          <span class="step-commit">feat: implement TrialNode dataclass</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num a">A2</div>
+        <div class="step-content">
+          <div class="step-title">bst.py</div>
+          <div class="step-desc">Full BST: insert, search, delete (3 cases), find_min/max, height, is_balanced, all 4 traversals + all private helpers.</div>
+          <span class="step-commit">feat: implement BST with traversals</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num a">A3</div>
+        <div class="step-content">
+          <div class="step-title">registry.py</div>
+          <div class="step-desc">HyperparamRegistry wrapping BST. add_trial, best, worst, top_k, range_query, prune_below, summary.</div>
+          <span class="step-commit">feat: implement HyperparamRegistry</span>
+          <br><span class="step-wait">📢 Tell Person B when done</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num a">A4</div>
+        <div class="step-content">
+          <div class="step-title">rebuild.py</div>
+          <div class="step-desc">3 strategies: naive (sorted insert), shuffled (random), balanced (divide &amp; conquer on sorted list).</div>
+          <span class="step-commit">feat: implement 3 BST rebuild strategies</span>
+          <br><span class="step-wait">📢 Tell Person B when done</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Person B -->
+    <div class="steps-card b">
+      <h3>🟢 Person B — data + ml_toolkit</h3>
+      <div class="step-item">
+        <div class="step-num b">B1</div>
+        <div class="step-content">
+          <div class="step-title">data/download.py</div>
+          <div class="step-desc">Download both UCI ZIPs, extract, clean, save as wdbc.csv and banknote.csv. Idempotent. Print row counts.</div>
+          <span class="step-commit">feat: implement dataset download pipeline</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num b">B2</div>
+        <div class="step-content">
+          <div class="step-title">ml_toolkit/grid_search.py</div>
+          <div class="step-desc">itertools.product over param grid. Call evaluate_fn per combo. Store in HyperparamRegistry. tqdm progress bar.</div>
+          <span class="step-commit">feat: implement grid search</span>
+          <br><span class="step-wait">⏳ Wait for Person A's registry.py</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num b">B3</div>
+        <div class="step-content">
+          <div class="step-title">ml_toolkit/transfer.py</div>
+          <div class="step-desc">In-order traverse both registries, build rank dicts, compute drift per config, return sorted report list.</div>
+          <span class="step-commit">feat: implement transfer analysis</span>
+          <br><span class="step-wait">⏳ Wait for Person A's rebuild.py</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Person C -->
+    <div class="steps-card c">
+      <h3>🟠 Person C — benchmarks + notebook</h3>
+      <div class="step-item">
+        <div class="step-num c">C1</div>
+        <div class="step-content">
+          <div class="step-title">benchmarks/timer.py</div>
+          <div class="step-desc">@timed decorator with functools.wraps. benchmark(fn, *args, repeats=5) returns mean ms. Use time.perf_counter().</div>
+          <span class="step-commit">feat: implement timing utilities</span>
+          <br><span style="font-size:0.72rem;color:#68d391;background:rgba(104,211,145,0.08);border:1px solid rgba(104,211,145,0.2);border-radius:5px;padding:4px 8px;display:inline-block;margin-top:6px;">✅ No dependencies — start today!</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num c">C2</div>
+        <div class="step-content">
+          <div class="step-title">Integration Testing</div>
+          <div class="step-desc">Verify all imports work. Run quick sanity tests. Fix any import path or packaging errors before writing notebook.</div>
+          <span class="step-wait">⏳ Wait for A + B to finish</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num c">C3</div>
+        <div class="step-content">
+          <div class="step-title">notebook/capstone.ipynb</div>
+          <div class="step-desc">All 8 sections. Every code cell has a Markdown cell before it. Tables for results. Blockquotes for observations. Under 30 lines per code cell.</div>
+          <span class="step-commit">docs: complete capstone notebook all 8 sections</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── HANDOFFS ── -->
+  <div class="section-title"><span class="icon">🤝</span> Handoff Messages — Copy &amp; Paste These</div>
+  <div class="handoff-grid">
+    <div class="handoff-card">
+      <h4>
+        <span style="color:#63b3ed;">Person A</span>
+        <span class="arrow-badge" style="background:rgba(99,179,237,0.1);color:#63b3ed;border:1px solid rgba(99,179,237,0.3);">→</span>
+        <span style="color:#68d391;">Person B</span>
+        &nbsp;<span style="color:#4a5568;font-size:0.75rem;">(after registry.py)</span>
+      </h4>
+      <pre><span class="cm"># POST THIS IN GROUP CHAT:</span>
+
+registry.py <span class="kw">is</span> done and pushed.
+Pull and start grid_search.py
+
+<span class="cm"># Test it works:</span>
+<span class="kw">from</span> bst_toolkit.registry <span class="kw">import</span> HyperparamRegistry
+
+reg = <span class="fn">HyperparamRegistry</span>()
+reg.<span class="fn">add_trial</span>(<span class="num">0.9533</span>, {<span class="str">'n_estimators'</span>: <span class="num">100</span>})
+<span class="fn">print</span>(reg.<span class="fn">best</span>())
+<span class="fn">print</span>(reg.<span class="fn">summary</span>())</pre>
+    </div>
+    <div class="handoff-card">
+      <h4>
+        <span style="color:#63b3ed;">Person A</span>
+        <span class="arrow-badge" style="background:rgba(99,179,237,0.1);color:#63b3ed;border:1px solid rgba(99,179,237,0.3);">→</span>
+        <span style="color:#68d391;">Person B</span>
+        &nbsp;<span style="color:#4a5568;font-size:0.75rem;">(after rebuild.py)</span>
+      </h4>
+      <pre><span class="cm"># POST THIS IN GROUP CHAT:</span>
+
+rebuild.py <span class="kw">is</span> done and pushed.
+Pull and start transfer.py
+
+<span class="cm"># Import like this:</span>
+<span class="kw">from</span> bst_toolkit.rebuild <span class="kw">import</span> (
+    rebuild_naive,
+    rebuild_shuffled,
+    rebuild_balanced
+)
+<span class="cm"># Each takes (registry, evaluate_fn, dataset)</span>
+<span class="cm"># and returns a new HyperparamRegistry</span></pre>
+    </div>
+    <div class="handoff-card">
+      <h4>
+        <span style="color:#63b3ed;">Person A</span>
+        <span class="arrow-badge" style="background:rgba(246,173,85,0.1);color:#f6ad55;border:1px solid rgba(246,173,85,0.3);">→</span>
+        <span style="color:#f6ad55;">Person C</span>
+        &nbsp;<span style="color:#4a5568;font-size:0.75rem;">(when all A done)</span>
+      </h4>
+      <pre><span class="cm"># Key imports for the notebook:</span>
+<span class="kw">from</span> bst_toolkit.registry <span class="kw">import</span> HyperparamRegistry
+<span class="kw">from</span> bst_toolkit.rebuild <span class="kw">import</span> rebuild_balanced
+
+reg.<span class="fn">inorder</span>()     <span class="cm"># sorted list ascending</span>
+reg.<span class="fn">top_k</span>(<span class="num">5</span>)      <span class="cm"># top 5 results</span>
+reg.<span class="fn">is_balanced</span>() <span class="cm"># True/False</span>
+reg.<span class="fn">summary</span>()     <span class="cm"># dict with all stats</span></pre>
+    </div>
+    <div class="handoff-card">
+      <h4>
+        <span style="color:#68d391;">Person B</span>
+        <span class="arrow-badge" style="background:rgba(246,173,85,0.1);color:#f6ad55;border:1px solid rgba(246,173,85,0.3);">→</span>
+        <span style="color:#f6ad55;">Person C</span>
+        &nbsp;<span style="color:#4a5568;font-size:0.75rem;">(when all B done)</span>
+      </h4>
+      <pre><span class="cm"># Key imports for the notebook:</span>
+<span class="kw">from</span> ml_toolkit.grid_search <span class="kw">import</span> grid_search
+<span class="kw">from</span> ml_toolkit.transfer <span class="kw">import</span> analyse_transfer
+
+registry_A = <span class="fn">grid_search</span>(
+    param_grid, evaluate_fn, (X, y)
+)
+
+report = <span class="fn">analyse_transfer</span>(registry_A, registry_B)
+<span class="cm"># returns list of dicts with:</span>
+<span class="cm"># params, score_A, score_B, rank_A, rank_B, drift</span></pre>
+    </div>
+  </div>
+
+  <!-- ── TIMELINE ── -->
+  <div class="section-title"><span class="icon">📅</span> Suggested Timeline</div>
+  <div style="background:#1a1f2e;border-radius:16px;padding:32px;border:1px solid #2d3748;">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-day">Day 1 – 2</div>
+        <div class="timeline-title">Foundations</div>
+        <div class="timeline-tasks">
+          <span class="timeline-task tl-a">A: node.py</span>
+          <span class="timeline-task tl-a">A: bst.py</span>
+          <span class="timeline-task tl-b">B: download.py</span>
+          <span class="timeline-task tl-c">C: timer.py ✅</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-day">Day 3 – 4</div>
+        <div class="timeline-title">Critical Path</div>
+        <div class="timeline-tasks">
+          <span class="timeline-task tl-a">A: registry.py ← critical</span>
+          <span class="timeline-task tl-b">B: read grid_search spec</span>
+          <span class="timeline-task tl-c">C: notebook section 1</span>
+          <span class="timeline-task tl-c">C: plan structure</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-day">Day 5</div>
+        <div class="timeline-title">Parallel Sprint</div>
+        <div class="timeline-tasks">
+          <span class="timeline-task tl-a">A: rebuild.py</span>
+          <span class="timeline-task tl-b">B: grid_search.py</span>
+          <span class="timeline-task tl-c">C: integration tests</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-day">Day 6 – 7</div>
+        <div class="timeline-title">ML + Notebook</div>
+        <div class="timeline-tasks">
+          <span class="timeline-task tl-a">A: review + help</span>
+          <span class="timeline-task tl-b">B: transfer.py</span>
+          <span class="timeline-task tl-c">C: notebook sections 2–5</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-day">Day 8</div>
+        <div class="timeline-title">Final Delivery</div>
+        <div class="timeline-tasks">
+          <span class="timeline-task tl-c">C: notebook sections 6–8</span>
+          <span class="timeline-task tl-a" style="background:rgba(246,135,179,0.1);color:#f687b3;border-color:rgba(246,135,179,0.2);">ALL: review</span>
+          <span class="timeline-task tl-a" style="background:rgba(246,135,179,0.1);color:#f687b3;border-color:rgba(246,135,179,0.2);">ALL: git tag v1.0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUICK TESTS ── -->
+  <div class="section-title"><span class="icon">🧪</span> Quick Sanity Tests</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;">
+    <div style="background:#1a1f2e;border-radius:14px;padding:24px;border:1px solid #2d3748;">
+      <div style="font-size:0.8rem;font-weight:700;color:#63b3ed;margin-bottom:12px;">Person A — Test node.py + bst.py</div>
+      <div class="code-block"><span class="kw">from</span> bst_toolkit.node <span class="kw">import</span> TrialNode
+<span class="kw">from</span> bst_toolkit.bst  <span class="kw">import</span> BST
+
+bst = <span class="fn">BST</span>()
+bst.<span class="fn">insert</span>(<span class="num">0.85</span>, {<span class="str">'n_estimators'</span>: <span class="num">50</span>})
+bst.<span class="fn">insert</span>(<span class="num">0.92</span>, {<span class="str">'n_estimators'</span>: <span class="num">100</span>})
+bst.<span class="fn">insert</span>(<span class="num">0.78</span>, {<span class="str">'n_estimators'</span>: <span class="num">200</span>})
+
+<span class="fn">print</span>(<span class="fn">len</span>(bst))       <span class="cm"># 3</span>
+<span class="fn">print</span>(bst.<span class="fn">find_max</span>()) <span class="cm"># score=0.92</span>
+<span class="fn">print</span>(bst.<span class="fn">find_min</span>()) <span class="cm"># score=0.78</span>
+scores = [n.score <span class="kw">for</span> n <span class="kw">in</span> bst.<span class="fn">inorder</span>()]
+<span class="fn">print</span>(scores)          <span class="cm"># [0.78, 0.85, 0.92]</span></div>
+    </div>
+    <div style="background:#1a1f2e;border-radius:14px;padding:24px;border:1px solid #2d3748;">
+      <div style="font-size:0.8rem;font-weight:700;color:#68d391;margin-bottom:12px;">Person A — Test registry.py</div>
+      <div class="code-block"><span class="kw">from</span> bst_toolkit.registry <span class="kw">import</span> HyperparamRegistry
+
+reg = <span class="fn">HyperparamRegistry</span>()
+reg.<span class="fn">add_trial</span>(<span class="num">0.85</span>, {<span class="str">'n_estimators'</span>: <span class="num">50</span>})
+reg.<span class="fn">add_trial</span>(<span class="num">0.92</span>, {<span class="str">'n_estimators'</span>: <span class="num">100</span>})
+reg.<span class="fn">add_trial</span>(<span class="num">0.95</span>, {<span class="str">'n_estimators'</span>: <span class="num">150</span>})
+
+<span class="fn">print</span>(reg.<span class="fn">best</span>())      <span class="cm"># score=0.95</span>
+<span class="fn">print</span>(reg.<span class="fn">top_k</span>(<span class="num">2</span>))   <span class="cm"># [0.95, 0.92]</span>
+<span class="fn">print</span>(reg.<span class="fn">summary</span>())  <span class="cm"># dict with stats</span></div>
+    </div>
+    <div style="background:#1a1f2e;border-radius:14px;padding:24px;border:1px solid #2d3748;">
+      <div style="font-size:0.8rem;font-weight:700;color:#f6ad55;margin-bottom:12px;">Person C — Test timer.py</div>
+      <div class="code-block"><span class="kw">from</span> benchmarks.timer <span class="kw">import</span> timed, benchmark
+
+<span class="fn">@timed</span>
+<span class="kw">def</span> <span class="fn">slow_fn</span>():
+    <span class="kw">return</span> <span class="fn">sum</span>(<span class="fn">range</span>(<span class="num">100000</span>))
+
+<span class="fn">slow_fn</span>()
+<span class="cm"># Output: slow_fn ran in X.XX ms</span>
+
+mean_ms = <span class="fn">benchmark</span>(<span class="fn">slow_fn</span>, repeats=<span class="num">10</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"Mean: {mean_ms:.2f} ms"</span>)</div>
+    </div>
+  </div>
+
+  <!-- ── SUBMISSION CHECKLIST ── -->
+  <div class="section-title"><span class="icon">✅</span> Final Submission Checklist</div>
+  <ul class="checklist">
+    <li><div class="check-box"></div> All three packages install cleanly with <code style="background:#2d3748;padding:2px 6px;border-radius:4px;font-size:0.8em;">pip install -e .</code></li>
+    <li><div class="check-box"></div> <code style="background:#2d3748;padding:2px 6px;border-radius:4px;font-size:0.8em;">from bst_toolkit import HyperparamRegistry</code> works with no errors</li>
+    <li><div class="check-box"></div> <code style="background:#2d3748;padding:2px 6px;border-radius:4px;font-size:0.8em;">bst.inorder()</code> returns nodes in strictly ascending score order</li>
+    <li><div class="check-box"></div> <code style="background:#2d3748;padding:2px 6px;border-radius:4px;font-size:0.8em;">rebuild_balanced()</code> produces a tree where <code style="background:#2d3748;padding:2px 6px;border-radius:4px;font-size:0.8em;">is_balanced() == True</code></li>
+    <li><div class="check-box"></div> Notebook runs top to bottom with no errors on a fresh kernel (Restart &amp; Run All)</li>
+    <li><div class="check-box"></div> Git log shows at least 5 meaningful commits with correct prefixes</li>
+    <li><div class="check-box"></div> <code style="background:#2d3748;padding:2px 6px;border-radius:4px;font-size:0.8em;">git tag v1.0</code> exists</li>
+    <li><div class="check-box"></div> Notebook exported as both <code style="background:#2d3748;padding:2px 6px;border-radius:4px;font-size:0.8em;">.ipynb</code> and <code style="background:#2d3748;padding:2px 6px;border-radius:4px;font-size:0.8em;">.html</code></li>
+    <li><div class="check-box"></div> AI tools disclosed in notebook Introduction section</li>
+  </ul>
+
+  <div style="text-align:center;margin-top:50px;padding:30px;color:#4a5568;font-size:0.8rem;">
+    Capstone Project Team Guide &nbsp;•&nbsp; Algorithmic Workshop AIS / EPITA &nbsp;•&nbsp; Generated with Claude Code
+  </div>
+
+</body>
+</html>
